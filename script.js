@@ -1,27 +1,29 @@
 const checkButton = document.getElementById("check-btn");
-const textInput = document.getElementById("text-input");
 const result = document.getElementById("result");
+const input = document.getElementById("text-input");
 
-//event listener
+//add event listener
 checkButton.addEventListener("click", () => {
-    const inputValue = textInput.value;
-    //alert if there is no input
-    if(inputValue === "") {
+    const inputValue = input.value;
+    if (inputValue == "") {
         alert("Please input a value");
-        return;
+        return;    
     } else {
-        checkIfPalindrome(inputValue);
-        textInput.value = "";
-    }  
-  });
+        checkForPalindrome(inputValue);
+        inputValue = "";
+    }
+});
 
-  const checkIfPalindrome = (inputValue) => {
-    //remove non alphanumerical characters & toLowerCase
-    const cleanInput = inputValue.replace(/[^A-Za-z0-9]/gi, "").toLowerCase();
+const checkForPalindrome = (input) =>  {
+    const originalValue = input;
+    //remove non alphanumerical characters, spaces, and lowercase
+    const cleanedInput = originalValue.replace(/[^A-Za-z0-9]/gi, "").toLowerCase();
     //reverse input
-    const reversedInput = cleanInput.split("").reverse().join("");
-    const resultMsg = `${inputValue} ${
-    cleanInput == reversedInput ? `is` : `is not` 
-    } a palindrome.`
+    const reversedInput = cleanedInput.split("").reverse().join("");
+    //check if something is a palindrome / result message
+    const resultMsg = `${originalValue} ${
+        cleanedInput == reversedInput ? 'is' : 'is not'
+    } a palindrome`
+    
     result.innerText = resultMsg;
 }
